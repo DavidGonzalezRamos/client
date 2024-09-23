@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 export default function Layout() {
   return (
     <>
@@ -10,20 +10,65 @@ export default function Layout() {
           </div>
 
           <ul className="space-y-4 mt-10">
-            <li className="p-3 font-mono font-black text-2xl opacity-80 hover:opacity-100 cursor-pointer">
-              Inicio
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 font-mono font-black text-2xl bg-pink-900 cursor-pointer"
+                    : "block p-3 font-mono font-black text-2xl opacity-80 hover:bg-pink-900 cursor-pointer"
+                }
+              >
+                Inicio
+              </NavLink>
             </li>
-            <li className="p-3 font-mono font-black text-2xl opacity-80 hover:opacity-100 cursor-pointer">
-              Torneos
+            <li>
+              <NavLink
+                to="/Torneos"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 font-mono font-black text-2xl bg-pink-900 cursor-pointer"
+                    : "block p-3 font-mono font-black text-2xl opacity-80 hover:bg-pink-900 cursor-pointer"
+                }
+              >
+                Torneos
+              </NavLink>
             </li>
-            <li className="p-3 font-mono font-black text-2xl opacity-80 hover:opacity-100 cursor-pointer">
-              Partidos
+            <li>
+              <NavLink
+                to="/partidos"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 font-mono font-black text-2xl bg-pink-900 cursor-pointer"
+                    : "block p-3 font-mono font-black text-2xl opacity-80 hover:bg-pink-900 cursor-pointer"
+                }
+              >
+                Partidos
+              </NavLink>
             </li>
-            <li className="p-3 font-mono font-black text-2xl opacity-80 hover:opacity-100 cursor-pointer">
-              Equipos
+            <li>
+              <NavLink
+                to="/equipos"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 font-mono font-black text-2xl bg-pink-900 cursor-pointer"
+                    : "block p-3 font-mono font-black text-2xl opacity-80 hover:bg-pink-900 cursor-pointer"
+                }
+              >
+                Equipos
+              </NavLink>
             </li>
-            <li className="p-3 font-mono font-black text-2xl opacity-80 hover:opacity-100 cursor-pointer">
-              Jugadores
+            <li>
+              <NavLink
+                to="/jugador"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block p-3 font-mono font-black text-2xl bg-pink-900 cursor-pointer"
+                    : "block p-3 font-mono font-black text-2xl opacity-80 hover:bg-pink-900 cursor-pointer"
+                }
+              >
+                Jugadores
+              </NavLink>
             </li>
           </ul>
 
@@ -42,17 +87,6 @@ export default function Layout() {
         </aside>
 
         <div className="flex-grow">
-          <header className="border-b-4 border-white w-4/5 fixed top-0 right-0 left-1/5 py-8 px-9 flex justify-between items-center z-10">
-            <h1 className="font-mono text-4xl text-white font-extrabold uppercase px-6">
-              Jugadores
-            </h1>
-            <div className="flex items-center space-x-4">
-              <button className="font-mono font-semibold bg-gradient-to-b from-red-300 to-pink-950 text-white py-2 px-12 rounded-full">
-                Agregar Jugador
-              </button>
-            </div>
-          </header>
-
           <main className="mt-36 px-8 text-white">
             <Outlet />
           </main>
