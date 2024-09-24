@@ -3,6 +3,7 @@ import {
   Form,
   useActionData,
   ActionFunctionArgs,
+  redirect,
 } from "react-router-dom";
 import ErrorMessage from "../components/ErrorMessage";
 import { addJugador } from "../services/JugadorService";
@@ -17,9 +18,9 @@ export async function action({ request }: ActionFunctionArgs) {
     return error;
   }
 
-  addJugador(data);
+  await addJugador(data);
 
-  return {};
+  return redirect("/jugador");
 }
 
 export default function NewJugador() {

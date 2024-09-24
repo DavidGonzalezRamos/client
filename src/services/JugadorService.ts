@@ -16,7 +16,7 @@ export async function addJugador(data: JugadorData) {
     });
     if(result.success){
       const url = `${import.meta.env.VITE_API_URL}/api/jugador`
-      const {data} = await axios.post(url, {
+      await axios.post(url, {
         nombreCompleto: result.output.nombreCompleto,
         equipo: result.output.equipo,
         numeroDorsal: result.output.numeroDorsal,
