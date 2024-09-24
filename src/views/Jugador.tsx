@@ -9,7 +9,7 @@ export default function Jugador() {
           </h1>
           <div className="flex items-center space-x-4">
             <button className="font-mono font-semibold bg-gradient-to-b from-red-300 to-pink-950 text-white py-2 px-12 rounded-full">
-              <Link to="jugador/nuevo">Agregar Jugador</Link>
+              <Link to="/jugador/nuevo">Agregar Jugador</Link>
             </button>
           </div>
         </header>

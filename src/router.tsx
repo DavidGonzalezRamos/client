@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Jugador from "./views/Jugador";
-import NewJugador from "./views/NewJugador";
+import NewJugador, { action as newJugadorAction } from "./views/NewJugador";
 import PaginaInicio from "./views/PaginaInicio";
 import Torneos from "./views/Torneos";
 import Partidos from "./views/Partidos";
@@ -21,10 +21,6 @@ export const router = createBrowserRouter([
         element: <Jugador />,
       },
       {
-        path: "jugador/nuevo",
-        element: <NewJugador />,
-      },
-      {
         path: "torneos",
         element: <Torneos />,
       },
@@ -37,5 +33,10 @@ export const router = createBrowserRouter([
         element: <Equipos />,
       },
     ],
+  },
+  {
+    path: "/jugador/nuevo",
+    element: <NewJugador />,
+    action: newJugadorAction,
   },
 ]);
