@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
-import Jugador from "./views/Jugador";
+import Jugador, { loader as jugadoresLoader } from "./views/Jugador";
 import NewJugador, { action as newJugadorAction } from "./views/NewJugador";
 import PaginaInicio from "./views/PaginaInicio";
 import Torneos from "./views/Torneos";
@@ -19,6 +19,7 @@ export const router = createBrowserRouter([
       {
         path: "jugador",
         element: <Jugador />,
+        loader: jugadoresLoader,
       },
       {
         path: "torneos",

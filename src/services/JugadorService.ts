@@ -1,5 +1,5 @@
 import { safeParse } from "valibot";
-import { DraftJugadorSchema } from "../types";
+import { DraftJugadorSchema, JugadoresSchema } from "../types";
 import axios from "axios";
 
 type JugadorData = {
@@ -28,5 +28,31 @@ export async function addJugador(data: JugadorData) {
     }
   } catch (error) {
       console.log(error);
+  }
+}
+
+// Función para convertir las fechas en objetos Date
+function convertirFechas(jugadores: any[]) {
+  return jugadores.map(jugador => ({
+    ...jugador,
+    fechaNacimiento: new Date(jugador.fechaNacimiento), // Convertir la fecha a Date
+  }));
+}
+
+export async function getJugadores() {
+  try {
+    const url = `${import.meta.env.VITE_API_URL}/api/jugador`;
+    const { data } = await axios(url);
+    // Convertir las fechas antes de validar
+    const jugadoresConFechas = convertirFechas(data.data);
+    // Validar usando el esquema con las fechas ya convertidas
+    const result = safeParse(JugadoresSchema, jugadoresConFechas);
+    if (result.success) {
+      return result.output;
+    } else {
+      throw new Error("Datos no válidos");
+    }
+  } catch (error) {
+    console.error(error);
   }
 }

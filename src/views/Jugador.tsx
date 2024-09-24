@@ -1,5 +1,14 @@
-import { Link } from "react-router-dom";
-export default function Jugador() {
+import { Link, useLoaderData } from "react-router-dom";
+import { getJugadores } from "../services/JugadorService";
+import JugadorDetails from "../components/JugadorDetails";
+import { Jugador } from "../types";
+export async function loader() {
+  const jugadores = await getJugadores();
+  return jugadores;
+}
+
+export default function Jugadores() {
+  const jugadores = useLoaderData() as Jugador[];
   return (
     <>
       <div className="flex-grow">
@@ -13,6 +22,25 @@ export default function Jugador() {
             </button>
           </div>
         </header>
+      </div>
+
+      <div className="p-2">
+        <table className="w-full mt-5 table-auto">
+          <thead className="font-mono font-semibold bg-gradient-to-b from-red-300 to-pink-950 text-white">
+            <tr>
+              <th className="p-2">Nombre del jugador</th>
+              <th className="p-2">Equipo</th>
+              <th className="p-2">Numero</th>
+              <th className="p-2">Posicion</th>
+              <th className="p-2">Fecha de nacimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            {jugadores.map((jugador) => (
+              <JugadorDetails key={jugador.id} jugador={jugador} />
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
