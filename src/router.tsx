@@ -10,6 +10,7 @@ import EditJugador, {
   loader as editJugadorLoader,
   action as editJugadorAction,
 } from "./views/EditJugador";
+import { action as deleteJugadorAction } from "./components/JugadorDetails";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "equipos",
         element: <Equipos />,
+      },
+      {
+        path: "/jugador/:id/eliminar",
+        action: deleteJugadorAction,
       },
     ],
   },

@@ -102,3 +102,12 @@ export async function updateJugador(data: JugadorData, id: Jugador['id']) {
   }
   
 }
+
+export async function deleteJugador(id: Jugador['id']) {
+  try {
+    const url = `${import.meta.env.VITE_API_URL}/api/jugador/${id}`;
+    await axios.delete(url);
+  } catch (error) {
+    console.error(error);
+  }
+}
