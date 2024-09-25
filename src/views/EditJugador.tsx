@@ -4,12 +4,25 @@ import {
   useActionData,
   ActionFunctionArgs,
   redirect,
+  LoaderFunctionArgs,
+  useLoaderData,
 } from "react-router-dom";
 import ErrorMessage from "../components/ErrorMessage";
-import { addJugador } from "../services/JugadorService";
+import { getJugadorById, updateJugador } from "../services/JugadorService";
+import { Jugador } from "../types";
 import JugadorForm from "../components/JugadorForm";
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
+  if (params.id !== undefined) {
+    const jugador = await getJugadorById(+params.id);
+    if (!jugador) {
+      return redirect("/jugador");
+    }
+    return jugador;
+  }
+}
+
+export async function action({ request, params }: ActionFunctionArgs) {
   const data = Object.fromEntries(await request.formData());
   let error = "";
   if (Object.values(data).includes("")) {
@@ -18,13 +31,15 @@ export async function action({ request }: ActionFunctionArgs) {
   if (error.length) {
     return error;
   }
+  if (params.id !== undefined) {
+    await updateJugador(data, +params.id);
 
-  await addJugador(data);
-
-  return redirect("/jugador");
+    return redirect("/jugador");
+  }
 }
 
-export default function NewJugador() {
+export default function EditJugador() {
+  const jugador = useLoaderData() as Jugador;
   const error = useActionData() as string;
 
   return (
@@ -32,7 +47,7 @@ export default function NewJugador() {
       <div className="min-h-screen bg-gradient-to-b from-red-300 to-pink-950">
         <header className="mb-10 flex justify-between items-center p-5">
           <h1 className="text-4xl text-white font-extrabold uppercase text-center">
-            Nuevo Jugador
+            Editar Jugador
           </h1>
           <div>
             <Link to="/jugador">
@@ -49,13 +64,14 @@ export default function NewJugador() {
           className="bg-gradient-to-b from-red-300 to-pink-950 p-10 rounded-lg shadow-md w-full"
           method="POST"
         >
-          <JugadorForm />
+          <JugadorForm jugador={jugador} />
+
           <div className="flex justify-center">
             <button
               type="submit"
               className="bg-pink-900 text-white font-bold py-3 px-8 rounded-full shadow-md hover:bg-pink-800 transition-all"
             >
-              Agregar Nuevo Jugador
+              Guardar Cambios de Jugador
             </button>
           </div>
         </Form>

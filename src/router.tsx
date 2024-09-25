@@ -6,6 +6,10 @@ import PaginaInicio from "./views/PaginaInicio";
 import Torneos from "./views/Torneos";
 import Partidos from "./views/Partidos";
 import Equipos from "./views/Equipos";
+import EditJugador, {
+  loader as editJugadorLoader,
+  action as editJugadorAction,
+} from "./views/EditJugador";
 
 export const router = createBrowserRouter([
   {
@@ -39,5 +43,11 @@ export const router = createBrowserRouter([
     path: "/jugador/nuevo",
     element: <NewJugador />,
     action: newJugadorAction,
+  },
+  {
+    path: "jugador/:id/editar",
+    element: <EditJugador />,
+    loader: editJugadorLoader,
+    action: editJugadorAction,
   },
 ]);

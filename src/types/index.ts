@@ -3,16 +3,16 @@ import { object, string, number, date, InferOutput, array, pipe, regex} from "va
 export const DraftJugadorSchema = object({
   nombreCompleto: pipe(
     string(),
-    regex(/^[^0-9]+$/, 'El nombre completo no puede contener números')
+    regex(/^[^0-9]+$/)
   ),
   equipo: pipe(
     string(),
-    regex(/^[^0-9]+$/, 'El equipo no puede contener números')
+    regex(/^[^0-9]+$/)
   ),
   numeroDorsal: number(),
   posicion: pipe(
     string(),
-    regex(/^[^0-9]+$/, 'La posicion no puede contener números')
+    regex(/^[^0-9]+$/)
   ),
   fechaNacimiento: date(),
 });

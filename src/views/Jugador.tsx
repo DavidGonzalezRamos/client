@@ -33,6 +33,7 @@ export default function Jugadores() {
               <th className="p-2">Numero</th>
               <th className="p-2">Posicion</th>
               <th className="p-2">Fecha de nacimiento</th>
+              <th className="p-2">Acciones</th>
             </tr>
           </thead>
           <tbody>
